@@ -1,0 +1,26 @@
+env:
+  es6: true
+  node: true
+parser: babel-eslint
+extends:
+  - plugin:react/recommended
+plugins:
+  - import
+  - react
+rules:
+  indent:
+    - error
+    - 2
+  max-len:
+    - error
+    - 80
+    - 2
+  object-curly-spacing:
+    - error
+    - always
+  quotes:
+    - error
+    - single
+  no-ternary: off
+parserOptions:
+  ecmaVersion: 2017
