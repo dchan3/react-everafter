@@ -2,3 +2,4 @@
 .babelrc
 lib/
 test/
+.travis.yml
