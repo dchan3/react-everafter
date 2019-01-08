@@ -5,7 +5,18 @@ import Adapter from 'enzyme-adapter-react-16';
 import Paginator from '../lib/components/Paginator';
 import pages from '../lib/utils/pages';
 import PaginatorControls from '../lib/components/PaginatorControls';
+import PropTypes from 'prop-types';
 Enzyme.configure({ adapter: new Adapter() });
+
+class TestComponent extends Component {
+  static propTypes = {
+    item: PropTypes.any.isRequired
+  }
+
+  render() {
+    return <div>{this.props.item}</div>
+  }
+}
 
 describe('pages function', function() {
   it('works with even divisibility', function(done) {
@@ -52,11 +63,7 @@ describe('Controls Render', function() {
 
 describe('Paginator Render when useListElement false or undefined', function() {
   it('renders correctly', function(done) {
-    const wrapper = render(<Paginator wrapper={class extends Component {
-        render() {
-          return <div>{this.props.item}</div>
-        }
-      }}
+    const wrapper = render(<Paginator wrapper={TestComponent}
       items={[1,2,3,4,5,6,7,8,9,10]} perPage={3} />);
     expect(wrapper.find('ul')).to.be.lengthOf(1);
     done();
@@ -65,11 +72,7 @@ describe('Paginator Render when useListElement false or undefined', function() {
 
 describe('Paginator Render when useListElement true', function() {
   it('renders correctly', function(done) {
-    const wrapper = render(<Paginator wrapper={class extends Component {
-        render() {
-          return <div>{this.props.item}</div>
-        }
-      }}
+    const wrapper = render(<Paginator wrapper={TestComponent}
       items={[1,2,3,4,5,6,7,8]} perPage={5} useListElement={true} />);
     expect(wrapper.find('ul')).to.be.lengthOf(2);
     done();
