@@ -2,7 +2,7 @@
 
 [![NPM version](https://img.shields.io/npm/v/react-everafter.svg?style=flat)](https://www.npmjs.com/package/react-everafter)
 ![npm](https://img.shields.io/npm/dt/react-everafter.svg)
-[![Build Status](https://travis-ci.org/dchan3/react-everafter.svg?branch=master)](https://travis-ci.org/dchan3/everafter)
+[![Build Status](https://travis-ci.org/dchan3/react-everafter.svg?branch=master)](https://travis-ci.org/dchan3/react-everafter)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/453fef0486e84ef1b3d6e5ce57120446)](https://www.codacy.com/app/dchan3/react-everafter?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=dchan3/react-everafter&amp;utm_campaign=Badge_Grade)
 
 ## Introduction
