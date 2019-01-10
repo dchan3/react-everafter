@@ -21,7 +21,7 @@ class TestComponent extends Component {
 
 describe('pages function', function() {
   it('works with even divisibility', function(done) {
-    var actual = pages([1,2,3,4,5,6,7,8,9], 3), expected = [
+    var actual = pages([1,2,3,4,5,6,7,8,9], 3, null), expected = [
       [1,2,3],
       [4,5,6],
       [7,8,9]
@@ -31,11 +31,19 @@ describe('pages function', function() {
   });
 
   it('works with remainder', function(done) {
-    var actual = pages([1,2,3,4,5,6,7], 4), expected = [
+    var actual = pages([1,2,3,4,5,6,7], 4, null), expected = [
       [1,2,3,4],
       [5,6,7]
     ];
     expect(actual).to.deep.equal(expected);
+    done();
+  });
+
+  it('works with maxPages', function(done) {
+    var actual = pages([1,2,3,4,5,6,7,8,9,10], 4, 2), expected = [
+      [1,2,3,4],
+      [5,6,7,8]
+    ];
     done();
   });
 });
