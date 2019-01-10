@@ -19,6 +19,9 @@ This package aims to make pagination generation easier to customize.
 -   `perPage`: `Number`. Number of items per page.
 -   `useListElement`: `Boolean`. True if items are to be put in `ul` list items. Value defaults to `false`.
 -   `activeTabColor`: `String`. CSS background-color value of tabs when active.
+-   `truncate`: `Boolean`. Value defaults to `false`.
+-   `maxPageTabs`: `Number`. Maximum number of page tabs to display. Defaults to `5`.
+-   `maxPages`: `Number`. Maximum number of pages to render. Defaults to `null`.
 
 ## Example Usage
 ```Javascript
