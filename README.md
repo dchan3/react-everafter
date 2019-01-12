@@ -13,7 +13,6 @@ This package aims to make pagination generation easier to customize.
 
 ## Components
 ### `EverAfter.Paginator`
-#### Props
 -   `items`: `Array`. Items to be paginated, preferably objects.
 -   `wrapper`: `React.Component`. Container for items. Should use attributes of objects in `items`.
 -   `perPage`: `Number`. Number of items per page.
@@ -22,6 +21,11 @@ This package aims to make pagination generation easier to customize.
 -   `truncate`: `Boolean`. Value defaults to `false`.
 -   `maxPageTabs`: `Number`. Maximum number of page tabs to display. Defaults to `5`.
 -   `maxPages`: `Number`. Maximum number of pages to render. Defaults to `null`.
+
+### `EverAfter.TablePaginator`
+Paginated Table. Properties are the same as those of `EverAfter.Paginator`, except `useListElement`. Additional properties are listed.
+-   `columns`: `Array`. Must contain objects with keys `headerText` and `display`. `headerText` dictates the text in the column header. `display` is a `Function` that takes `item` as sole parameter. Dictates how the item is rendered in the column.
+-   `enumerate`: `Boolean`. Numbers items if set to `true`. Defaults to `false`.
 
 ## Example Usage
 ```Javascript
