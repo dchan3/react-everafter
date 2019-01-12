@@ -3,6 +3,7 @@ import { expect } from 'chai';
 import Enzyme, { render } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import Paginator from '../lib/components/Paginator';
+import TablePaginator from '../lib/components/TablePaginator';
 import pages from '../lib/utils/pages';
 import truncatePageList from '../lib/utils/truncate_page_list.js';
 import PaginatorControls from '../lib/components/PaginatorControls';
@@ -102,6 +103,7 @@ describe('Paginator Render when useListElement false or undefined', function() {
   it('renders correctly', function(done) {
     const wrapper = render(<Paginator wrapper={TestComponent}
       items={[1,2,3,4,5,6,7,8,9,10]} perPage={3} />);
+    expect(wrapper.find('div > div')).to.be.lengthOf(4);
     expect(wrapper.find('ul')).to.be.lengthOf(1);
     done();
   });
@@ -110,8 +112,21 @@ describe('Paginator Render when useListElement false or undefined', function() {
 describe('Paginator Render when useListElement true', function() {
   it('renders correctly', function(done) {
     const wrapper = render(<Paginator wrapper={TestComponent}
-      items={[1,2,3,4,5,6,7,8]} perPage={5} useListElement={true} />);
+      items={[1,2,3,4,5,6,7,8,9]} perPage={5} useListElement={true} />);
+    expect(wrapper.find('li')).to.be.lengthOf(8);
     expect(wrapper.find('ul')).to.be.lengthOf(2);
+    done();
+  });
+});
+
+describe('Table Paginator Render when enumerate false', function() {
+  it('renders correctly', function(done) {
+    const wrapper = render(<TablePaginator columns={[{
+      'headerText': 'ID #',
+      'display': item => item
+    }]} items={[1,2,3,4,5,6,7,8]} perPage={5} />);
+    expect(wrapper.find('tr')).to.be.lengthOf(6);
+    expect(wrapper.find('b').text()).to.equal('ID #');
     done();
   });
 });

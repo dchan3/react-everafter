@@ -23,6 +23,12 @@ This package aims to make pagination generation easier to customize.
 -   `maxPageTabs`: `Number`. Maximum number of page tabs to display. Defaults to `5`.
 -   `maxPages`: `Number`. Maximum number of pages to render. Defaults to `null`.
 
+### `EverAfter.TablePaginator`
+#### Props
+Paginated Table. Properties are the same as those of `EverAfter.Paginator`, except `useListElement`. Additional properties are listed.
+-   `columns`: `Array`. Must contain objects with keys `headerText` and `display`. `headerText` dictates the text in the column header. `display` is a `Function` that takes `item` as sole parameter. Dictates how the item is rendered in the column.
+-   `enumerate`: `Boolean`. Numbers items if set to `true`. Defaults to `false`.
+
 ## Example Usage
 ```Javascript
 import React, { Component } from 'react';
