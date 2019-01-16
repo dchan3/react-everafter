@@ -70,6 +70,11 @@ describe('truncate page list function', function() {
     done();
   });
 
+  it('works when currentPage == numberOfPages - 1', function(done) {
+    expect(truncatePageList(8, 5, 7)).to.deep.equal([1, null, 6, 7, 8]);
+    done();
+  });
+
   it('works when currentPage is anything else', function(done) {
     expect(truncatePageList(10, 5, 6)).to.deep.equal(
       [1, null, 5, 6, 7, null, 10]);
