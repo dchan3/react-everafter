@@ -125,10 +125,20 @@ describe('Paginator Render when useListElement true', function() {
 });
 
 describe('Table Paginator Render when enumerate false', function() {
-  it('renders correctly', function(done) {
+  it('renders correctly with non-JSX display', function(done) {
     const wrapper = render(<TablePaginator columns={[{
       'headerText': 'ID #',
       'display': item => item
+    }]} items={[1,2,3,4,5,6,7,8]} perPage={5} />);
+    expect(wrapper.find('tr')).to.be.lengthOf(6);
+    expect(wrapper.find('b').text()).to.equal('ID #');
+    done();
+  });
+
+  it('renders correctly with JSX display', function(done) {
+    const wrapper = render(<TablePaginator columns={[{
+      'headerText': 'ID #',
+      'display': item => <p>{item}</p>
     }]} items={[1,2,3,4,5,6,7,8]} perPage={5} />);
     expect(wrapper.find('tr')).to.be.lengthOf(6);
     expect(wrapper.find('b').text()).to.equal('ID #');
