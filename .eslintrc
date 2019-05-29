@@ -22,5 +22,6 @@ rules:
     - error
     - single
   no-ternary: off
+  no-console: error
 parserOptions:
   ecmaVersion: 2017
