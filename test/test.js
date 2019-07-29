@@ -7,20 +7,19 @@ import { PaginatorControlProvider } from
   '../lib/components/PaginatorControlContext';
 import TablePaginator from '../lib/components/TablePaginator';
 import pages from '../lib/utils/pages';
-import truncatePageList from '../lib/utils/truncate_page_list.js';
+import truncatePageList from '../lib/utils/truncate_page_list';
+import { shallowSearch } from '../lib/utils/search';
 import PaginatorControls from '../lib/components/PaginatorControls';
-import PropTypes from 'prop-types';
+import { any } from 'prop-types';
 Enzyme.configure({ adapter: new Adapter() });
 
-class TestComponent extends Component {
-  static propTypes = {
-    item: PropTypes.any.isRequired
-  };
-
-  render() {
-    return <div>{this.props.item}</div>
-  }
+function TestComponent({ item }) {
+  return <div>{item}</div>
 }
+
+TestComponent.propTypes = {
+  item: any.isRequired
+};
 
 describe('pages function', function() {
   it('works with even divisibility', function(done) {
@@ -88,8 +87,7 @@ describe('truncate page list function', function() {
 describe('Controls Render', function() {
   it('renders correctly when even', function(done) {
     const wrapper = render(<PaginatorControlProvider>
-      <PaginatorControls currentPage={1}
-      pages={pages([1,2,3,4,5,6,7,8], 4)} />
+      <PaginatorControls currentPage={1} numPages={2} />
     </PaginatorControlProvider>);
     expect(wrapper.find('li')).to.be.lengthOf(3);
     done();
@@ -97,8 +95,7 @@ describe('Controls Render', function() {
 
   it('renders correctly with remainder', function(done) {
     const wrapper = render(<PaginatorControlProvider>
-      <PaginatorControls
-       pages={pages([1,2,3,4,5,6,7,8,9,10], 3)} />
+      <PaginatorControls numPages={4} />
     </PaginatorControlProvider>);
     expect(wrapper.find('li')).to.be.lengthOf(5);
     done();
@@ -142,6 +139,55 @@ describe('Table Paginator Render when enumerate false', function() {
     }]} items={[1,2,3,4,5,6,7,8]} perPage={5} />);
     expect(wrapper.find('tr')).to.be.lengthOf(6);
     expect(wrapper.find('b').text()).to.equal('ID #');
+    done();
+  });
+});
+
+describe('Search functions', function() {
+  it('shallow search - non-objects', function(done) {
+    var items = ["foo", "bar", "baz"], expected = ['bar', 'baz'];
+    expect(shallowSearch(items, "ba")).to.deep.equal(expected);
+    done();
+  });
+
+  it('shallow search - non-objects with space', function(done) {
+    var items = ["Alpha Beta", "Alpha Omega", "Alpha Tau"],
+      expected = ["Alpha Beta", "Alpha Omega"];
+    expect(shallowSearch(items, "Alp e")).to.deep.equal(expected);
+    done();
+  });
+
+  it('shallow search - objects', function(done) {
+    var items = [{
+      "name": "John Doe",
+      "yearInducted": "1991",
+    },
+    {
+      "name": "Heidi Sky",
+      "yearInducted": "1991",
+    },
+    {
+      "name": "John Snow",
+      "yearInducted": "2000",
+    }], expected1 = [{
+      "name": "John Doe",
+      "yearInducted": "1991",
+    }, {
+      "name": "Heidi Sky",
+      "yearInducted": "1991",
+    }], expected2 = [{
+      "name": "John Doe",
+      "yearInducted": "1991",
+    }, {
+      "name": "John Snow",
+      "yearInducted": "2000",
+    }];
+    expect(shallowSearch(items, "1991")).to.deep.equal(expected1);
+    expect(shallowSearch(items, "John")).to.deep.equal(expected2);
+    done();
+  });
+
+  it('deep search', function(done) {
     done();
   });
 });
