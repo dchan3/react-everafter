@@ -86,16 +86,24 @@ describe('truncate page list function', function() {
 
 describe('Controls Render', function() {
   it('renders correctly when even', function(done) {
-    const wrapper = render(<PaginatorControlProvider>
-      <PaginatorControls currentPage={1} numPages={2} />
+    const wrapper = render(<PaginatorControlProvider initialVals={{
+      items: [1,2,3,4,5,6,7,8],
+      perPage: 4,
+      currentPage: 1
+    }}>
+      <PaginatorControls />
     </PaginatorControlProvider>);
     expect(wrapper.find('li')).to.be.lengthOf(3);
     done();
   });
 
   it('renders correctly with remainder', function(done) {
-    const wrapper = render(<PaginatorControlProvider>
-      <PaginatorControls numPages={4} />
+    const wrapper = render(<PaginatorControlProvider initialVals={{
+      items: [1,2,3,4,5,6,7,8,9,10],
+      perPage: 3,
+      currentPage: 1
+    }}>
+      <PaginatorControls />
     </PaginatorControlProvider>);
     expect(wrapper.find('li')).to.be.lengthOf(5);
     done();
@@ -114,7 +122,8 @@ describe('Paginator Render when useListElement false or undefined', function() {
 describe('Paginator Render when useListElement true', function() {
   it('renders correctly', function(done) {
     const wrapper = render(<Paginator wrapper={TestComponent}
-      items={[1,2,3,4,5,6,7,8,9]} perPage={5} useListElement={true} />);
+      items={[1,2,3,4,5,6,7,8,9]} perPage={5} useListElement={true}
+      currentPage={2} />);
     expect(wrapper.find('li')).to.be.lengthOf(8);
     expect(wrapper.find('ul')).to.be.lengthOf(2);
     done();

@@ -23,5 +23,6 @@ rules:
     - single
   no-ternary: off
   no-console: error
+  react/jsx-key: off
 parserOptions:
   ecmaVersion: 2017
